@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'CSE484 Lab2' });
 });
 
+router.get('/panda.jpg', function (req, res, next) {
+  res.render('panda');
+});
+
 module.exports = router;
